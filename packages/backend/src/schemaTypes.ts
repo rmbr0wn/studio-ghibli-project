@@ -5,19 +5,23 @@ import { Kind } from 'graphql';
 const stringSchema = z.string();
 const dateSchema = z.date();
 
-export * from './schemaModules/user';
+export * from './schemaModules/ghibli';
 
 export const Query = objectType({
   name: 'Query',
-  definition() {
-    null;
+  definition(t) {
+    t.string('placeholder', {
+      resolve: () => 'This is a placeholder query',
+    });
   },
 });
 
 export const Mutation = objectType({
   name: 'Mutation',
-  definition() {
-    null;
+  definition(t) {
+    t.string('placeholder', {
+      resolve: () => 'This is a placeholder mutation',
+    });
   },
 });
 

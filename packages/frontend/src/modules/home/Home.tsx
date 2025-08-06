@@ -1,86 +1,46 @@
-import { useMutation } from '@apollo/client';
-import { Box, Button, TextField } from '@mui/material';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { CREATE_USER } from '~/shared/mutations';
-
-interface FormData {
-  email: string;
-  name: string;
-}
+import { useQuery } from '@apollo/client';
+import { Box, Typography, CircularProgress } from '@mui/material';
+import { GET_HELLO_WORLD } from '~/shared/queries';
 
 const Home = () => {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: '',
-      name: '',
-    },
-  });
+  const { data, loading, error } = useQuery(GET_HELLO_WORLD);
 
-  const [createUser] = useMutation(CREATE_USER);
+  if (loading) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="200px"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
-  const onSubmit: SubmitHandler<FormData> = async (formData) => {
-    if (!formData.email) {
-      return;
-    }
-
-    const { data } = await createUser({
-      variables: {
-        input: {
-          name: formData.name,
-          email: formData.email,
-        },
-      },
-    });
-
-    // eslint-disable-next-line no-console
-    console.log(data);
-  };
+  if (error) {
+    return (
+      <Box padding="16px">
+        <Typography color="error">Error: {error.message}</Typography>
+      </Box>
+    );
+  }
 
   return (
-    <Box padding="16px">
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-        display="flex"
-        flexDirection="column"
-        maxWidth="600px"
-        gap="16px"
-      >
-        <Controller
-          name="name"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label="Name"
-              aria-invalid={errors.name ? 'true' : 'false'}
-              {...field}
-            />
-          )}
-        />
-        <Controller
-          name="email"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField
-              label="Email"
-              aria-invalid={errors.email ? 'true' : 'false'}
-              error={Boolean(errors.email)}
-              required
-              {...field}
-            />
-          )}
-        />
-        <Button type="submit" variant="contained">
-          Submit
-        </Button>
-      </Box>
-      <Link to="/user/1">User 1</Link>
+    <Box
+      padding="16px"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="200px"
+    >
+      <Typography variant="h2" component="h1" gutterBottom>
+        {data?.helloWorld?.message || 'Hello World'}
+      </Typography>
+      <Typography variant="body1" color="textSecondary">
+        This message is fetched from the GraphQL backend!
+      </Typography>
     </Box>
   );
 };

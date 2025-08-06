@@ -1,14 +1,11 @@
 import { ApolloServer } from '@apollo/server';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { applyMiddleware } from 'graphql-middleware';
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import http from 'http';
 import { schema } from '~/schema';
-import permissions from '~/permissions';
 import { logger } from '~/loggers';
-// import sentryPlugin from '~/apolloPlugins/sentry'; // Uncomment this line if you have Sentry set up
 import pinoLogger from '~/apolloPlugins/logger';
 import { NODE_ENV } from '~/config';
 
@@ -50,10 +47,8 @@ export function createExpressApp() {
 }
 
 export function createApolloServer(httpServer: http.Server) {
-  const graphqlSchema = applyMiddleware(schema, permissions);
-
   const server = new ApolloServer({
-    schema: graphqlSchema,
+    schema,
     introspection: NODE_ENV !== 'production',
     ...(NODE_ENV !== 'test' ? { logger: logger } : {}), // Only add logger if not in test
     plugins: [

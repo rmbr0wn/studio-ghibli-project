@@ -25,7 +25,9 @@ export async function startServer(): Promise<void> {
     httpServer.listen({ port: PORT }, resolve),
   );
 
-  logger.info(`🚀 Server ready at http://localhost:${PORT}${GRAPHQL_PATH}`);
+  logger.info(
+    `🚀 GraphQL server ready at http://localhost:${PORT}${GRAPHQL_PATH}`,
+  );
 }
 
 startServer();

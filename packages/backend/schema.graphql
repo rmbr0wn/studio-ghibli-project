@@ -5,21 +5,15 @@
 """Date custom scalar type"""
 scalar Date
 
+type HelloWorld {
+  message: String
+}
+
 type Mutation {
-  createUser(input: UserInput!): User!
+  placeholder: String
 }
 
 type Query {
-  user(userId: Int!): User
-}
-
-type User {
-  email: String!
-  id: Int!
-  name: String
-}
-
-input UserInput {
-  email: String!
-  name: String
+  helloWorld: HelloWorld!
+  placeholder: String
 }
