@@ -34,9 +34,9 @@ The flow should get you most of the way there, but editing and cleaning up the c
 
 ### Frontend Features
 
-1. **Four Film Buttons**: Display four buttons, each containing the name of one of the specified Studio Ghibli films
+1. **Four Film Buttons**: Display four buttons, each containing the name of one of the specified Studio Ghibli films. When clicked (event driven), the component should fetch that particular film.
 2. **Loading States**: When clicked, buttons should show a loading state
-3. **GraphQL Integration**: Buttons call your GraphQL backend to fetch film data
+3. **GraphQL Integration**: Buttons call your GraphQL backend to fetch film data and provide properly typed hooks (useQuery, useLazyQuery, etc). Please use codegen to accomplish this.
 4. **Card Display**: Replace clicked buttons with cards showing:
    - Movie image
    - Movie title
@@ -55,7 +55,8 @@ The flow should get you most of the way there, but editing and cleaning up the c
 ### Backend Features
 
 1. **GraphQL Server**: Create resolvers that fetch data from the Studio Ghibli API
-2. **API Integration**: Connect to the public Studio Ghibli API to retrieve film information
+2. **GraphQL Schema**: Update the Schema (objectTypes) to properly type resolver data
+3. **API Integration**: Connect to the public Studio Ghibli API to retrieve film information
 
 ### Bonus Feature
 
