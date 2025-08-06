@@ -37,25 +37,32 @@ This project uses pnpm for package management. Install it by following the [pnpm
 
    We use [pnpm workspaces](https://pnpm.io/workspaces) for dependency sharing between packages.
 
-3. **Start the development servers**:
-
-   **Backend (GraphQL Server)**:
+3. **Copy .env.example values into .env file**:
 
    ```bash
-   cd packages/backend
-   pnpm dev
+   cp ./packages/backend/.env.example ./packages/backend/.env
+   cp ./packages/frontend/.env.example ./packages/frontend/.env
    ```
 
-   The GraphQL server will start on `http://localhost:8080`
+4. **Start the development servers**:
 
-   **Frontend (React App)**:
+- **Backend (GraphQL Server)**:
 
-   ```bash
-   cd packages/frontend
-   pnpm dev
-   ```
+  ```bash
+  cd packages/backend
+  pnpm dev
+  ```
 
-   The React app will start on `http://localhost:3000`
+  The GraphQL server will start on `http://localhost:8080`
+
+- **Frontend (React App)**:
+
+  ```bash
+  cd packages/frontend
+  pnpm dev
+  ```
+
+  The React app will start on `http://localhost:3000`
 
 ## Project Structure
 
