@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { Box, Typography, CircularProgress } from '@mui/material';
-import { GET_HELLO_WORLD } from '~/shared/queries';
+import { GET_HELLO_WORLD } from '~/graphql/queries';
 
 const Home = () => {
   const { data, loading, error } = useQuery(GET_HELLO_WORLD);
