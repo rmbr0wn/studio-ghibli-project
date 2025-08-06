@@ -74,31 +74,25 @@ The four main films to implement:
 
 ## Setup Instructions
 
-### Option 1: Using Yurt (Recommended)
+1. **Fork this repository**: Click the "Fork" button on this GitHub repository to create your own copy
+2. **Clone your fork**: Clone your forked repository to your local machine
+3. **Install dependencies**: Run `pnpm install` in the root directory
+4. **Complete the challenge**: Follow the development process and implement the required features
+5. **Create a Pull Request**: When finished, create a PR against the `main` branch of this repository
+6. **Share your work**: Provide the link to your PR to demonstrate your completed work
 
-We recommend using our in-house project setup tool for convenience:
-
-1. Clone the yurt project (https://github.com/yeti/yurt)
-2. Navigate to the cloned repository
-3. Install dependencies: `pnpm i`
-4. Navigate to the CLI directory: `cd packages/cli`
-5. Run the setup tool: `pnpm yurt`
-6. Follow the prompts and select: **"React/Vite App + Apollo GraphQL server"**
-
-### Option 2: Custom Setup
-
-If you prefer, create your own React + GraphQL + Node.js project using your preferred technologies and tools.
-
-## External API Reference
+## External References
 
 - **Studio Ghibli API**: [https://ghibliapi.vercel.app/](https://ghibliapi.vercel.app/)
 - **Documentation**: [https://ghibliapi.vercel.app/#tag/Films](https://ghibliapi.vercel.app/#tag/Films)
+- **Zeplin Designs**: [https://app.zeplin.io/project/6883f9f0cd284cd950c6fd3a](https://app.zeplin.io/project/6883f9f0cd284cd950c6fd3a)
+- **Base Repository** [https://github.com/yeti/studio-ghibli-project](https://github.com/yeti/studio-ghibli-project)
 
 ## Deliverables
 
 ### 1. Public GitHub Repository
 
-Create a public GitHub repository containing your complete project.
+Create a public GitHub repository containing your complete project with PR against main.
 
 ### 2. README Documentation
 
