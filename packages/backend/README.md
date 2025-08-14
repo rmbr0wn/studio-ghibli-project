@@ -1,44 +1,105 @@
 # Backend
 
-## Getting Started
+GraphQL (Apollo Server) + Express backend that proxies the public Studio Ghibli API.
 
-1. Make sure you have `pnpm` version 8+ installed. You can find installation instructions [here](https://pnpm.io/installation).
-2. Make sure you've started your dev database by running `docker compose up` from the project's root.
-3. From `packages/backend` run `pnpm install`
-4. From `packages/backend` run `pnpm generate` to generate the Prisma and Nexus schemas.
-5. From `packages/backend` run `pnpm dev` to start the local dev server. You should be able to visit the Apollo Server sandbox at `localhost:8080/api/graphql`.
+## Prerequisites
 
-## Updating Models
+- pnpm 8+
+- Node 18+
 
-After updating the schema in `packages/backend/prisma/schema.prisma`, you'll need to run the following commands from `packages/backend` to update the Prisma and Nexus schemas:
+## Environment
 
-1. `pnpm generate:prisma`
-2. `pnpm migrate:create`
-3. `pnpm migrate`
-4. `pnpm generate:nexus`
+Create `packages/backend/.env` with:
 
-## Tests
+```
+LOG_LEVEL=info
+NODE_ENV=development
+PORT=8080
+GRAPHQL_PATH=/api/graphql
+```
 
-[Jest](https://jestjs.io/) is used for unit and integration testing.
-In order to run integration tests, you'll need to run the following commands from `packages/backend`:
+## Install
 
-1. `pnpm db:test:start`
-2. `pnpm test`
+From the repository root:
 
-## Deploying to Render
+```
+pnpm install
+```
 
-When deploying the backend to Render, you will first need to create a PostgreSQL database for your backend to connnect to.
+## Running commands
 
-Upon creation of the database, you will then create a web service for the backend. The prompts should be filled in as follows:
+You can run scripts from the repo root using filters, or by changing directories:
 
-Branch: `develop` or `main` depending on whether this is for staging or production,
+- From repo root with filters:
 
-Root Directory: `packages/backend`
+```
+pnpm --filter backend <script>
+```
 
-Build Command: `pnpm build;`
+- Or from the package directory:
 
-Start Command: `node dist/src/server.js`
+```
+cd packages/backend
+pnpm <script>
+```
 
-Generally speaking we can select the `Starter` plan unless otherwise specified by the projects needs.
+## Generate schema types
 
-Add any required env variables including the `DATABASE_URL` from the database you created earlier.
+Generate Nexus schema/types:
+
+- From repo root:
+
+```
+pnpm --filter backend generate
+```
+
+- Or from the package directory:
+
+```
+cd packages/backend
+pnpm generate
+```
+
+## Run (development)
+
+Start the dev server with nodemon:
+
+- From repo root:
+
+```
+pnpm --filter backend dev
+```
+
+- Or from the package directory:
+
+```
+cd packages/backend
+pnpm dev
+```
+
+- GraphQL endpoint: `http://localhost:8080/api/graphql`
+- Health check: `http://localhost:8080/healthz`
+
+## Scripts
+
+For each script, you can use either form:
+
+- **dev**
+  - Root: `pnpm --filter backend dev`
+  - cd: `cd packages/backend && pnpm dev`
+- **generate**
+  - Root: `pnpm --filter backend generate`
+  - cd: `cd packages/backend && pnpm generate`
+- **build**
+  - Root: `pnpm --filter backend build`
+  - cd: `cd packages/backend && pnpm build`
+- **lint**
+  - Root: `pnpm --filter backend lint`
+  - cd: `cd packages/backend && pnpm lint`
+- **test**
+  - Root: `pnpm --filter backend test`
+  - cd: `cd packages/backend && pnpm test`
+
+## Notes
+
+- This server acts as a minimal proxy to the Studio Ghibli API. No persistence or caching is required.

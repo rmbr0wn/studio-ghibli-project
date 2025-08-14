@@ -1,34 +1,121 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+React + TypeScript + Vite app using Apollo Client. It queries the local GraphQL backend for Studio Ghibli film data.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prerequisites
 
-## Expanding the ESLint configuration
+- pnpm 8+
+- Node 18+
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Environment
 
-- Configure the top-level `parserOptions` property like this:
+Create `packages/frontend/.env` with:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```
+VITE_GRAPHQL_URL=http://localhost:8080/api/graphql
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Install
 
-## Deploying to Render
+From the repository root:
 
-When deploying to Render, you'll need to add some environment variables to the Render service:
+```
+pnpm install
+```
 
-- `HUSKY="0"` to disable Husky
-- `SKIP_INSTALL_DEPS="true"` to prevent Render from using `npm` to install dependencies. This is necessary because Render uses `npm` to install dependencies by default, but this project uses `pnpm` to manage dependencies.
+## Running commands
+
+You can run scripts from the repo root using filters, or by changing directories:
+
+- From repo root with filters:
+
+```
+pnpm --filter frontend <script>
+```
+
+- Or from the package directory:
+
+```
+cd packages/frontend
+pnpm <script>
+```
+
+## Codegen (GraphQL types and hooks)
+
+Generate typed operations and React hooks from the backend schema:
+
+- From repo root:
+
+```
+pnpm --filter frontend codegen
+```
+
+- Or from the package directory:
+
+```
+cd packages/frontend
+pnpm codegen
+```
+
+Watch mode during development:
+
+- From repo root:
+
+```
+pnpm --filter frontend codegen:watch
+```
+
+- Or from the package directory:
+
+```
+cd packages/frontend
+pnpm codegen:watch
+```
+
+## Run (development)
+
+Start the Vite dev server (served on port 3000):
+
+- From repo root:
+
+```
+pnpm --filter frontend dev
+```
+
+- Or from the package directory:
+
+```
+cd packages/frontend
+pnpm dev
+```
+
+- App URL: `http://localhost:3000`
+- Ensure the backend is running at `http://localhost:8080/api/graphql` (see backend README).
+
+## Scripts
+
+For each script, you can use either form:
+
+- **dev**
+  - Root: `pnpm --filter frontend dev`
+  - cd: `cd packages/frontend && pnpm dev`
+- **build**
+  - Root: `pnpm --filter frontend build`
+  - cd: `cd packages/frontend && pnpm build`
+- **codegen**
+  - Root: `pnpm --filter frontend codegen`
+  - cd: `cd packages/frontend && pnpm codegen`
+- **codegen:watch**
+  - Root: `pnpm --filter frontend codegen:watch`
+  - cd: `cd packages/frontend && pnpm codegen:watch`
+- **lint**
+  - Root: `pnpm --filter frontend lint`
+  - cd: `cd packages/frontend && pnpm lint`
+- **test**
+  - Root: `pnpm --filter frontend test`
+  - cd: `cd packages/frontend && pnpm test`
+- **preview**
+  - Root: `pnpm --filter frontend preview`
+  - cd: `cd packages/frontend && pnpm preview`
