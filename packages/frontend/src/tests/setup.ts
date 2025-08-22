@@ -6,4 +6,4 @@ afterEach(() => {
   cleanup();
 });
 
-expect.extend(matchers);
+// expect.extend(matchers);

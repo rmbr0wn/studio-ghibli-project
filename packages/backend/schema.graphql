@@ -5,6 +5,17 @@
 """Date custom scalar type"""
 scalar Date
 
+type Film {
+  description: String
+  director: String
+  image: String
+  movie_banner: String
+  release_date: String
+  rt_score: String
+  running_time: String
+  title: String
+}
+
 type HelloWorld {
   message: String
 }
@@ -14,6 +25,7 @@ type Mutation {
 }
 
 type Query {
+  film(id: String!): Film!
   helloWorld: HelloWorld!
   placeholder: String
 }
