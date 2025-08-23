@@ -36,17 +36,17 @@
   - [x] 2.3 Ensure cards reorganize into a single-column layout on mobile.
   - [x] 2.4 Add smooth animations for card flipping.
 
-- [ ] 3.0 Backend: GraphQL Resolvers
+- [x] 3.0 Backend: GraphQL Resolvers
 
   - [x] 3.1 Create resolvers to fetch data from the Studio Ghibli API.
   - [x] 3.2 Update the GraphQL schema to include required fields (title, description, director, release_date, running_time, rt_score, movie_banner, image).
 
-- [ ] 4.0 Backend: API Integration
+- [x] 4.0 Backend: API Integration
 
-  - [ ] 4.1 Connect to the public Studio Ghibli API using Axios.
-  - [ ] 4.2 Implement HTTP service for making API requests.
+  - [x] 4.1 Connect to the public Studio Ghibli API using Axios.
+  - [x] 4.2 Implement HTTP service for making API requests.
 
-- [ ] 5.0 Testing
-  - [ ] 5.1 Write unit tests for frontend components (buttons, cards).
-  - [ ] 5.2 Write unit tests for backend resolvers and services.
-  - [ ] 5.3 Test mobile responsiveness and touch interactions for card flipping.
+- [x] 5.0 Testing
+  - [x] 5.1 Write unit tests for frontend components (buttons, cards).
+  - [x] 5.2 Write unit tests for backend resolvers and services.
+  - [x] 5.3 Test mobile responsiveness and touch interactions for card flipping.

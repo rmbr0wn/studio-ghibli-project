@@ -197,6 +197,40 @@
 @media (max-width: 767px) {
   .flip-card {
     -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none; /* Disable callout on iOS */
+    -webkit-user-select: none; /* Disable text selection */
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation; /* Optimize for touch */
+  }
+
+  /* Ensure adequate touch target size (minimum 44px) */
+  .film-button {
+    min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent hover effects on mobile */
+  .flip-card:hover {
+    transform: none;
+  }
+
+  .film-button:hover:not(:disabled) {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Enhanced focus states for accessibility */
+  .flip-card:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+
+  .film-button:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
   }
 }
 

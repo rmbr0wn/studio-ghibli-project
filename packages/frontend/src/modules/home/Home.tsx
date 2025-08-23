@@ -15,7 +15,7 @@ const films = [
 
 const Home = () => {
   const [fetchFilm, { loading, data }] = useLazyQuery(FILM_QUERY);
-  const [flippedCard, setFlippedCard] = useState<string | null>(null);
+  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
   const [loadingFilm, setLoadingFilm] = useState<string | null>(null);
   const [filmData, setFilmData] = useState<Record<string, any>>({});
 
@@ -34,7 +34,15 @@ const Home = () => {
   };
 
   const handleCardFlip = (cardId: string) => {
-    setFlippedCard(flippedCard === cardId ? null : cardId);
+    setFlippedCards((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(cardId)) {
+        newSet.delete(cardId);
+      } else {
+        newSet.add(cardId);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -57,7 +65,7 @@ const Home = () => {
               <div className="card-container relative w-full max-w-sm h-96 perspective-1000 mx-auto">
                 <div
                   className={`flip-card relative w-full h-full transform-style-preserve-3d cursor-pointer ${
-                    flippedCard === filmData[film.id].title
+                    flippedCards.has(filmData[film.id].title || '')
                       ? 'rotate-y-180'
                       : ''
                   }`}
@@ -67,8 +75,29 @@ const Home = () => {
                     handleCardFlip(filmData[film.id].title || '')
                   }
                   onMouseLeave={() =>
-                    window.innerWidth >= 768 && setFlippedCard(null)
+                    window.innerWidth >= 768 && setFlippedCards(new Set())
                   }
+                  // Enhanced accessibility and touch support
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Flip card to see details for ${
+                    filmData[film.id].title
+                  }`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleCardFlip(filmData[film.id].title || '');
+                    }
+                  }}
+                  // Touch event handlers for better mobile support
+                  onTouchStart={(e) => {
+                    // Don't prevent default to allow normal event flow
+                  }}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    // Trigger flip on touch end
+                    handleCardFlip(filmData[film.id].title || '');
+                  }}
                 >
                   {/* Front of card */}
                   <div className="card-front absolute inset-0 w-full h-full backface-hidden bg-white rounded-lg shadow-lg overflow-hidden">
