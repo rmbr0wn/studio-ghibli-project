@@ -1,14 +1,18 @@
-import { makeSchema, queryType } from 'nexus';
+import { makeSchema } from 'nexus';
 import { ApolloServer } from '@apollo/server';
 import { GhibliQueries } from '~/schemaModules/ghibli/queries.ghibliSchema';
-import { Film } from '~/schemaModules/ghibli/objectTypes.ghibliSchema';
+import {
+  Film,
+  HelloWorld,
+} from '~/schemaModules/ghibli/objectTypes.ghibliSchema';
+import { Query } from '~/schemaTypes';
 import axios from 'axios';
 import { GraphQLClient } from 'graphql-request';
 
 jest.mock('axios');
 
 const schema = makeSchema({
-  types: [queryType(), GhibliQueries, Film],
+  types: [Query, GhibliQueries, Film, HelloWorld],
 });
 
 const server = new ApolloServer({

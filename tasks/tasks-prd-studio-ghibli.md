@@ -11,6 +11,8 @@
 - `packages/backend/src/schemaModules/ghibli/objectTypes.ghibliSchema.ts` - GraphQL schema for film data.
 - `packages/backend/src/tests/queries.ghibliSchema.test.ts` - Unit tests for backend resolvers.
 - `packages/backend/src/services/Http/Http.service.ts` - Service for making HTTP requests to the Studio Ghibli API.
+- `packages/backend/src/services/GhibliApi/GhibliApi.service.ts` - Dedicated service for Studio Ghibli API interactions.
+- `packages/backend/src/shared/constants.ts` - Backend constants including API endpoints and error messages.
 - `packages/backend/src/tests/index.test.ts` - Unit tests for backend resolvers.
 - `packages/frontend/src/tests/App.test.tsx` - Unit tests for frontend components.
 
@@ -27,7 +29,7 @@
   - [x] 1.2 Add loading states to buttons when fetching data.
   - [x] 1.3 Style buttons using Tailwind CSS.
 
-- [ ] 2.0 Frontend: Display Film Cards
+- [x] 2.0 Frontend: Display Film Cards
 
   - [x] 2.1 Replace colored cards with film cards displaying movie image and title.
   - [x] 2.2 Implement interactive card flipping to reveal additional details.
@@ -36,8 +38,8 @@
 
 - [ ] 3.0 Backend: GraphQL Resolvers
 
-  - [ ] 3.1 Create resolvers to fetch data from the Studio Ghibli API.
-  - [ ] 3.2 Update the GraphQL schema to include required fields (title, description, director, release_date, running_time, rt_score, movie_banner, image).
+  - [x] 3.1 Create resolvers to fetch data from the Studio Ghibli API.
+  - [x] 3.2 Update the GraphQL schema to include required fields (title, description, director, release_date, running_time, rt_score, movie_banner, image).
 
 - [ ] 4.0 Backend: API Integration
 

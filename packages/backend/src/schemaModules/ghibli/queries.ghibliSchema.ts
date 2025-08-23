@@ -1,9 +1,9 @@
-import { stringArg, nonNull, extendType } from 'nexus';
+import { stringArg, nonNull, extendType, list } from 'nexus';
 import { HelloWorld, Film } from './objectTypes.ghibliSchema';
 import { GraphQLError } from 'graphql';
 import { GQL_ERROR_CODES, ErrorMessages } from '~/shared/constants';
 import { getHelloWorld } from '~/shared/utils';
-import axios from 'axios';
+import { GhibliApiService } from '~/services/GhibliApi/GhibliApi.service';
 
 export const TourQueries = extendType({
   type: 'Query',
@@ -33,6 +33,7 @@ export const TourQueries = extendType({
 export const GhibliQueries = extendType({
   type: 'Query',
   definition(t) {
+    // Query for a single film by ID
     t.field('film', {
       type: nonNull(Film),
       args: {
@@ -40,12 +41,41 @@ export const GhibliQueries = extendType({
       },
       resolve: async (_, { id }) => {
         try {
-          const response = await axios.get(
-            `https://ghibliapi.herokuapp.com/films/${id}`,
-          );
-          return response.data;
+          const ghibliApiService = new GhibliApiService();
+          const filmData = await ghibliApiService.getFilmById(id);
+          return filmData;
         } catch (error) {
-          throw new Error('Failed to fetch film data');
+          // Re-throw GraphQL errors as-is for proper client handling
+          if (error instanceof GraphQLError) {
+            throw error;
+          }
+
+          // Throw a generic error for unexpected errors
+          throw new GraphQLError(ErrorMessages.ServerError, {
+            extensions: { code: GQL_ERROR_CODES.SERVER_ERROR },
+          });
+        }
+      },
+    });
+
+    // Query for all films (useful for testing and future features)
+    t.field('films', {
+      type: nonNull(list(nonNull(Film))),
+      resolve: async () => {
+        try {
+          const ghibliApiService = new GhibliApiService();
+          const filmsData = await ghibliApiService.getAllFilms();
+          return filmsData;
+        } catch (error) {
+          // Re-throw GraphQL errors as-is for proper client handling
+          if (error instanceof GraphQLError) {
+            throw error;
+          }
+
+          // Throw a generic error for unexpected errors
+          throw new GraphQLError(ErrorMessages.ServerError, {
+            extensions: { code: GQL_ERROR_CODES.SERVER_ERROR },
+          });
         }
       },
     });

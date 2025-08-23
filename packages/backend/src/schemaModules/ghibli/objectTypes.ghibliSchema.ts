@@ -10,13 +10,15 @@ export const HelloWorld = objectType({
 export const Film = objectType({
   name: 'Film',
   definition(t) {
-    t.string('title');
-    t.string('description');
-    t.string('director');
-    t.string('release_date');
-    t.string('running_time');
-    t.string('rt_score');
-    t.string('movie_banner');
-    t.string('image');
+    // Required fields from the task requirements
+    t.nonNull.string('id');
+    t.nonNull.string('title');
+    t.nonNull.string('description');
+    t.nonNull.string('director');
+    t.nonNull.string('release_date');
+    t.nonNull.string('running_time');
+    t.nonNull.string('rt_score');
+    t.nonNull.string('movie_banner');
+    t.nonNull.string('image');
   },
 });

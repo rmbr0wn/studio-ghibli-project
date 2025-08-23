@@ -45,14 +45,15 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Film: { // root type
-    description?: string | null; // String
-    director?: string | null; // String
-    image?: string | null; // String
-    movie_banner?: string | null; // String
-    release_date?: string | null; // String
-    rt_score?: string | null; // String
-    running_time?: string | null; // String
-    title?: string | null; // String
+    description: string; // String!
+    director: string; // String!
+    id: string; // String!
+    image: string; // String!
+    movie_banner: string; // String!
+    release_date: string; // String!
+    rt_score: string; // String!
+    running_time: string; // String!
+    title: string; // String!
   }
   HelloWorld: { // root type
     message?: string | null; // String
@@ -73,14 +74,15 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Film: { // field return type
-    description: string | null; // String
-    director: string | null; // String
-    image: string | null; // String
-    movie_banner: string | null; // String
-    release_date: string | null; // String
-    rt_score: string | null; // String
-    running_time: string | null; // String
-    title: string | null; // String
+    description: string; // String!
+    director: string; // String!
+    id: string; // String!
+    image: string; // String!
+    movie_banner: string; // String!
+    release_date: string; // String!
+    rt_score: string; // String!
+    running_time: string; // String!
+    title: string; // String!
   }
   HelloWorld: { // field return type
     message: string | null; // String
@@ -90,6 +92,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     film: NexusGenRootTypes['Film']; // Film!
+    films: NexusGenRootTypes['Film'][]; // [Film!]!
     helloWorld: NexusGenRootTypes['HelloWorld']; // HelloWorld!
     placeholder: string | null; // String
   }
@@ -99,6 +102,7 @@ export interface NexusGenFieldTypeNames {
   Film: { // field return type name
     description: 'String'
     director: 'String'
+    id: 'String'
     image: 'String'
     movie_banner: 'String'
     release_date: 'String'
@@ -114,6 +118,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     film: 'Film'
+    films: 'Film'
     helloWorld: 'HelloWorld'
     placeholder: 'String'
   }
