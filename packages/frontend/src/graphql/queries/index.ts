@@ -1,24 +1,5 @@
-import { gql } from '~/graphql/gen';
+import { GetHelloWorldDocument, GetFilmDocument } from '~/graphql/gen/graphql';
 
-export const GET_HELLO_WORLD = gql(`
-  query GetHelloWorld {
-    helloWorld {
-      message
-    }
-  }
-`);
+export const GET_HELLO_WORLD = GetHelloWorldDocument;
 
-export const FILM_QUERY = gql`
-  query GetFilm($id: String!) {
-    film(id: $id) {
-      title
-      description
-      director
-      release_date
-      running_time
-      rt_score
-      movie_banner
-      image
-    }
-  }
-`;
+export const FILM_QUERY = GetFilmDocument;

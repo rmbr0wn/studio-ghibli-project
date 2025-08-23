@@ -34,10 +34,11 @@ describe('Home Component', () => {
       </MockedProvider>,
     );
 
-    const button = screen.getByText('Porco Rosso');
+    const button = screen.getByRole('button', { name: 'Porco Rosso' });
     fireEvent.click(button);
 
-    expect(await screen.findByText('Porco Rosso')).toBeInTheDocument();
+    // Wait for the card to appear by looking for the image
+    expect(await screen.findByAltText('Porco Rosso')).toBeInTheDocument();
   });
 
   it('displays loading state when fetching data', () => {

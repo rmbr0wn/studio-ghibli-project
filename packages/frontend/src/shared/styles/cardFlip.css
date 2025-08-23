@@ -1,0 +1,226 @@
+/* 3D Card Flip Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Enhanced smooth animations for card flipping */
+.flip-card {
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.flip-card:hover {
+  transform: scale(1.02);
+}
+
+/* Smooth transitions for front and back faces */
+.card-front,
+.card-back {
+  transition: all 0.4s ease-in-out;
+  transform-origin: center center;
+}
+
+/* Enhanced flip animation with bounce effect */
+.flip-card.flipped {
+  animation: flipBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes flipBounce {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+  50% {
+    transform: rotateY(90deg) scale(1.05);
+  }
+  100% {
+    transform: rotateY(180deg) scale(1);
+  }
+}
+
+/* Glow effect on hover */
+.flip-card:hover .card-front,
+.flip-card:hover .card-back {
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
+}
+
+/* Subtle shimmer effect for cards */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.card-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Enhanced entrance animations for cards */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+}
+
+.card-container {
+  animation: cardFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Staggered animation for multiple cards */
+.card-container:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.card-container:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.card-container:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.card-container:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Enhanced button hover animations */
+.film-button {
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translateY(0);
+  position: relative;
+  overflow: hidden;
+}
+
+.film-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.film-button:hover::before {
+  left: 100%;
+}
+
+.film-button:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.film-button:active:not(:disabled) {
+  transform: translateY(-1px) scale(1.01);
+  transition-duration: 0.1s;
+}
+
+/* Loading state with enhanced animation */
+.film-button:disabled {
+  transform: none;
+  opacity: 0.8;
+}
+
+/* Enhanced loading pulse animation */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes loadingSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-pulse {
+  animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.loading-spinner {
+  animation: loadingSpinner 1s linear infinite;
+}
+
+/* Utility class for line clamping */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mobile touch interaction improvements */
+@media (max-width: 767px) {
+  .flip-card {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Mobile responsive adjustments for small screens (320px and up) */
+@media (max-width: 480px) {
+  .perspective-1000 {
+    max-width: calc(100vw - 2rem);
+    margin: 0 auto;
+  }
+
+  .flip-card {
+    min-height: 24rem;
+  }
+
+  /* Ensure text remains readable on small screens */
+  .line-clamp-3 {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+}
+
+/* Extra small screens (320px) */
+@media (max-width: 320px) {
+  .perspective-1000 {
+    max-width: calc(100vw - 1rem);
+  }
+}
