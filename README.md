@@ -81,59 +81,69 @@ This project uses pnpm for package management. Install it by following the [pnpm
 
 - `pnpm dev` - Start development server
 - `pnpm build` - Build for production
-- `pnpm preview` - Preview production build
 - `pnpm test` - Run tests
 
-## GraphQL Code Generation
+## Documentation Deliverables
 
-This project uses GraphQL Code Generation with the client preset to create TypeScript types and typed GraphQL operations.
+### Setup Instructions
 
-### Using Codegen
+- See above – I didn't modify the setup at all.
 
-1. **Write GraphQL operations** in TypeScript files within `src/graphql/queries/` or `src/graphql/mutations/` directories
-2. **Generate types and utilities**:
-   ```bash
-   cd packages/frontend
-   pnpm codegen
-   ```
-3. **Import and use the generated `gql` function** in your components:
+### Project Overview
 
-   ```typescript
-   import { GET_FILM } from '~/graphql/queries';
-   import { useQuery } from '@apollo/client';
+- The entirety of the frontend code is written inside `/packages/frontend/src/modules/home/Home.tsx`, with the test file `Home.test.tsx` located in the same folder.
 
-   const { data, loading, error } = useQuery(GET_FILM);
-   ```
+- The GraphQL backend files changed are listed in the `/tasks/tasks-prd-studio-ghibli.md` file.
 
-### Codegen Configuration
+- I used Tailwind for custom styling to try and align it closely with the design mockups given in Zeplin.
 
-The codegen configuration in `codegen.ts` uses:
+### Dev-Tasks Process
 
-- **Schema**: `../backend/schema.graphql` (local schema file)
-- **Documents**: `./src/graphql/mutations/*.ts` and `./src/graphql/queries/*.ts`
-- **Output**: `./src/graphql/gen/` (generated files directory)
-- **Preset**: `client` (provides type-safe GraphQL operations)
+I followed the steps given in the "Development Process (Required)" section of the Notion document, but I will explain in more detail what I did:
 
-### File Structure
+1. I provided the necessary files as context for creating the PRD (`.cursor/.rules/create-prd`, `cursorules`).
+2. I copied and pasted the task overview, frontend features and backend features from the Notion document, and asked the agent to proceed with creating the PRD according to those requirements.
+3. After reading through the PRD and feeling satisfied with the results, I attached similar files as per step #1 (alongside `generate-tasks.mdc`), and asked the agent to generate the task list.
+4. I reviewed the task list generated, and then asked the agent to process the task list one sub-task at a time (while passing in the `process-task-list.mdc` as context).
+5. At the end of each parent task I asked the agent to create tests, run those tests, and then commit (as per the requirements).
 
-```
-src/graphql/
-├── gen/           # Generated files (do not edit)
-│   ├── gql.ts     # Generated gql function
-│   ├── graphql.ts # Generated types
-│   └── index.ts   # Exports
-├── queries/       # GraphQL query operations
-│   └── index.ts
-└── mutations/     # GraphQL mutation operations
-```
+- **Note:** Please see `/tasks/prd-studio-ghibli.md` and `tasks-prd-studio-ghibli.md` for the relevant agent generated files.
 
-### Workflow
+### Time Spent
 
-1. Write your GraphQL queries/mutations in TypeScript files under `src/graphql/queries/` or `src/graphql/mutations/`
-2. Run `pnpm codegen` to generate typed GraphQL utilities
-3. Import the `gql` function from `~/graphql/gen` and use it with your operations
-4. TypeScript will provide full type safety for your GraphQL operations
+- **~7.5 hours overall**
+- **~3.5 - 4 hours** working with the agent to complete tasks, modify generated code, fine-tune requirements, and style the JSX.
+- The remaining time was spent working through somewhat unrelated issues (see "Challenges" below for more info).
 
-## Development Workflow
+### Rationale (Technology/Architecture)
 
-This project follows the dev-tasks workflow. See `Studio_Ghibli_Take_Home_Challenge.md` for detailed development process requirements.
+I didn't modify the existing architecture/technology much. The main technology decision I did make was to use TailwindCSS for styling, and I chose Tailwind for 2 reasons:
+
+1. I thought it would be quick for one-off designs like this.
+2. It is the CSS framework I'm most familiar with, which again I thought would allow me to work more quickly.
+
+However, for a larger project where reusable/modular components with a cohesive style are desired/necessary, I would likely look at something like MaterialUI or a similar component library in place of Tailwind (or perhaps in addition to Tailwind).
+
+### Challenges
+
+- I was using a Virtual Machine running Linux with VSCode, and when using the agent mode my VSCode repeatedly froze and crashed.
+  - This alone consumed at least 2-3 hours of my time since I had to repeatedly close the editor, restart it, and re-run any prior prompts (assuming the agent didn't finish its work in time).
+- I had issues running the initial code generated by the agent due to the agent's code relying on missing GraphQL queries, which repeatedly threw errors. This probably consumed ~1-1.5 hours of my time.
+  - In hindsight, what I should have done from the beginning was simply continue with the agent code generation and have it fix the errors once it got to them. This is what I eventually ended up doing, but I wasted some time trying to manually fix things myself (and I don't have any prior GraphQL experience which made it even more challenging).
+
+### Limitations
+
+- Beyond using responsive design mode in the browser, I didn't verify mobile functionality (e.g. tapping to flip cards), so I don't know how the site will perform on actual mobile devices.
+
+### Future Improvements
+
+- **Error handling**: This didn't seem necessary for the project, but I would definitely add error handling for the GraphQL queries so that errors don't crash the frontend application.
+- **Better modular design**: Instead of everything in the `Home.tsx` file, I would likely create components like `GhibliCard.tsx` (or similar) to have proper separation of concerns, better modularity, and less of a wall of JSX.
+- **A better way of viewing the full movie descriptions**: Currently it overflows to an ellipsis, which is probably fine for the scope of the project, but it would be ideal for the user to be able to read it.
+  - This could likely be done via dynamically resizing cards (instead of fixed size), or perhaps taking another more thoughtful approach to card information organization.
+
+### Final Comments
+
+- I wanted to say that I appreciate the detailed and well-formatted instructions for this assignment! There was no real ambiguity with any of the steps, and it was easy to follow along and refer to.
+
+- I also wanted to say thank you for introducing me to this structured agentic workflow. I've been using LLMs for years to help write code, but I have never seen an approach like this! It works wonders, and I will definitely be stealing it for the future.
