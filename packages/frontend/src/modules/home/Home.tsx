@@ -28,6 +28,8 @@ const films = [
   },
 ];
 
+/* ~ Temporary change to allow for PR --> Sorry! ~ */
+
 const Home = () => {
   const [fetchFilm] = useLazyQuery(FILM_QUERY);
   const [showBanner, setShowBanner] = useState<Set<string>>(new Set());
